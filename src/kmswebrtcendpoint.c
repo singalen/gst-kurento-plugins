@@ -205,7 +205,7 @@ kms_webrtc_transport_create (NiceAgent * agent, guint stream_id,
 /* WebRTCConnection */
 
 static void
-nice_agent_recv (NiceAgent * agent, guint stream_id, guint component_id,
+nice_agent_recv_local (NiceAgent * agent, guint stream_id, guint component_id,
     guint len, gchar * buf, gpointer user_data)
 {
   /* Nothing to do, this callback is only for negotiation */
@@ -264,9 +264,9 @@ kms_webrtc_connection_create (NiceAgent * agent, GMainContext * context,
 
   nice_agent_set_stream_name (agent, conn->stream_id, name);
   nice_agent_attach_recv (agent, conn->stream_id,
-      NICE_COMPONENT_TYPE_RTP, context, nice_agent_recv, NULL);
+      NICE_COMPONENT_TYPE_RTP, context, nice_agent_recv_local, NULL);
   nice_agent_attach_recv (agent, conn->stream_id,
-      NICE_COMPONENT_TYPE_RTCP, context, nice_agent_recv, NULL);
+      NICE_COMPONENT_TYPE_RTCP, context, nice_agent_recv_local, NULL);
 
   conn->rtp_transport =
       kms_webrtc_transport_create (agent, conn->stream_id,

@@ -5,7 +5,10 @@ project ("gst-kurento-plugins")
 message ("If KurentoHelpers is not found, then it is necessary to install
           kms-cmake-utils package from the kurento repository")
 
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} /usr/local/share/cmake-2.8/Modules/)
+
 find_package(KurentoHelpers REQUIRED)
+include(${PROJECT_SOURCE_DIR}/CMake/GLibHelpers.cmake)
 
 include (KurentoGitHelpers)
 
@@ -49,7 +52,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMake")
 
 find_package(LibSctp REQUIRED)
 find_package(LibVpx REQUIRED)
-find_package(LibTesseract REQUIRED)
+#find_package(LibTesseract REQUIRED)
 
 find_program(VALGRIND valgrind)
 
